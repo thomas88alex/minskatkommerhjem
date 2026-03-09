@@ -1,146 +1,935 @@
-```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nedräkning tills du kommer hem ❤️</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tills du kommer hem ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
+  <style>
+    :root {
+      --bg-top: #0d1624;
+      --bg-mid: #1b2d42;
+      --bg-bottom: #2f4f69;
 
-body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-text-align:center;
-font-family:'Poppins',sans-serif;
+      --glass: rgba(255, 255, 255, 0.11);
+      --glass-strong: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.18);
 
-background: linear-gradient(180deg,#0f2027,#203a43,#2c5364);
-color:white;
-overflow:hidden;
-}
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.84);
+      --soft: rgba(255, 255, 255, 0.66);
 
-/* Snow background */
+      --gold: #f0dec2;
+      --blush: #f5dbe6;
+      --paper: #fffaf2;
+      --paper-text: #5d4b3f;
 
-body:before{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background-image:
-radial-gradient(white 2px, transparent 2px),
-radial-gradient(white 1px, transparent 1px),
-radial-gradient(white 1.5px, transparent 1.5px);
-background-size:200px 200px,150px 150px,250px 250px;
-background-position:0 0,40px 60px,130px 270px;
-opacity:0.25;
-}
+      --shadow: 0 22px 60px rgba(0,0,0,0.28);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
 
-.container{
-position:relative;
-z-index:2;
-max-width:600px;
-padding:40px;
-border-radius:20px;
-backdrop-filter:blur(10px);
-background:rgba(255,255,255,0.08);
-box-shadow:0 10px 40px rgba(0,0,0,0.4);
-}
+    * {
+      box-sizing: border-box;
+    }
 
-h1{
-font-family:'Dancing Script',cursive;
-font-size:3.5rem;
-margin-bottom:10px;
-}
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,0.18), transparent 25%),
+        linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 42%, var(--bg-bottom) 100%);
+    }
 
-.subtitle{
-font-size:1.1rem;
-opacity:0.9;
-margin-bottom:25px;
-}
+    body {
+      position: relative;
+    }
 
-#timer{
-font-size:2rem;
-font-weight:500;
-margin-top:10px;
-}
+    .page {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      isolation: isolate;
+    }
 
-.heart{
-font-size:30px;
-margin-top:20px;
-animation:pulse 1.8s infinite;
-}
+    #snow {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-@keyframes pulse{
-0%{transform:scale(1);}
-50%{transform:scale(1.2);}
-100%{transform:scale(1);}
-}
+    .aurora {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(255, 225, 235, 0.10), transparent 25%),
+        radial-gradient(circle at 80% 10%, rgba(255, 242, 210, 0.10), transparent 28%),
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.07), transparent 30%);
+      filter: blur(20px);
+    }
 
-.footer{
-margin-top:30px;
-font-size:0.9rem;
-opacity:0.8;
-}
+    .mountains {
+      position: fixed;
+      inset: auto 0 0 0;
+      height: 35vh;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.95;
+      background:
+        linear-gradient(to top, rgba(7,12,20,0.34), transparent 65%),
+        radial-gradient(ellipse at 10% 100%, #dfe9f2 0 16%, transparent 16.4%),
+        radial-gradient(ellipse at 27% 100%, #edf4fa 0 21%, transparent 21.4%),
+        radial-gradient(ellipse at 46% 100%, #d8e3ee 0 17%, transparent 17.4%),
+        radial-gradient(ellipse at 64% 100%, #edf4fa 0 23%, transparent 23.4%),
+        radial-gradient(ellipse at 82% 100%, #dce8f2 0 19%, transparent 19.4%),
+        radial-gradient(ellipse at 100% 100%, #eef5fb 0 15%, transparent 15.4%);
+    }
 
-</style>
+    .wrap {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 30px 18px 50px;
+    }
+
+    .hero-card {
+      max-width: 860px;
+      margin: 18px auto 26px;
+      padding: 38px 28px 30px;
+      text-align: center;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.08));
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), transparent 32%),
+        radial-gradient(circle at top right, rgba(255,245,230,0.12), transparent 26%);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.3rem, 8vw, 5.8rem);
+      line-height: 0.95;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: #fffdfa;
+      text-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    }
+
+    .lead {
+      max-width: 700px;
+      margin: 0 auto 24px;
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .timer-title {
+      margin: 0 0 14px;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--soft);
+    }
+
+    .countdown {
+      max-width: 720px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .time-box {
+      padding: 18px 12px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .time-value {
+      display: block;
+      font-size: clamp(1.65rem, 5vw, 2.8rem);
+      line-height: 1;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .time-unit {
+      display: block;
+      margin-top: 7px;
+      font-size: 0.88rem;
+      color: var(--soft);
+      letter-spacing: 0.04em;
+    }
+
+    .countdown-message {
+      min-height: 28px;
+      margin-top: 16px;
+      color: #fff8f2;
+      font-size: 1rem;
+    }
+
+    .heart {
+      margin-top: 10px;
+      font-size: 1.9rem;
+      display: inline-block;
+      animation: pulse 1.9s ease-in-out infinite;
+      filter: drop-shadow(0 3px 10px rgba(255, 150, 180, 0.35));
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.14); }
+    }
+
+    .gallery-strip {
+      max-width: 1280px;
+      margin: 0 auto 28px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      align-items: stretch;
+    }
+
+    .photo {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      min-height: 240px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.55s ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.045);
+    }
+
+    .photo::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 42%;
+      background: linear-gradient(to top, rgba(0,0,0,0.22), transparent);
+      pointer-events: none;
+    }
+
+    .panels {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .panel {
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    .panel h2 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .panel p {
+      max-width: 620px;
+      margin: 0 auto 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.97rem;
+    }
+
+    .music-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: rgba(255,255,255,0.92);
+      color: #17304a;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .music-status,
+    .footer-note {
+      margin-top: 12px;
+      color: var(--soft);
+      font-size: 0.9rem;
+    }
+
+    .status-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin-right: 8px;
+      border-radius: 999px;
+      background: #98a7b6;
+      vertical-align: middle;
+      box-shadow: 0 0 12px rgba(255,255,255,0.12);
+    }
+
+    .status-dot.ready {
+      background: var(--gold);
+      box-shadow: 0 0 16px rgba(240, 222, 194, 0.55);
+    }
+
+    .envelope-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 280px;
+      perspective: 1300px;
+      padding-top: 6px;
+    }
+
+    .envelope-stack {
+      position: relative;
+      width: min(92vw, 410px);
+      height: 250px;
+    }
+
+    .hint-badge {
+      position: absolute;
+      left: 50%;
+      top: -2px;
+      transform: translateX(-50%);
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fffdfa;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      max-width: calc(100vw - 40px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.14);
+      backdrop-filter: blur(8px);
+    }
+
+    .envelope {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 340px;
+      height: 220px;
+      cursor: not-allowed;
+      user-select: none;
+      transition: transform 0.28s ease;
+      filter: drop-shadow(0 18px 28px rgba(0,0,0,0.28));
+    }
+
+    .envelope.unlocked {
+      cursor: pointer;
+    }
+
+    .envelope.unlocked:hover {
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    .envelope.locked-shake {
+      animation: lockedShake 0.35s ease;
+    }
+
+    @keyframes lockedShake {
+      0%, 100% { transform: translateX(-50%) rotate(0deg); }
+      25% { transform: translateX(-50%) rotate(-2deg); }
+      50% { transform: translateX(-50%) rotate(2deg); }
+      75% { transform: translateX(-50%) rotate(-1deg); }
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #f7e0bd, #e8c391);
+    }
+
+    .envelope-pocket {
+      position: absolute;
+      inset: auto 0 0 0;
+      height: 73%;
+      background: linear-gradient(180deg, #f2d6ab, #ddb57e);
+      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 100%, 0 100%);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      z-index: 4;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      inset: 0;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      background: linear-gradient(180deg, #f9e4c4, #ebc692);
+      clip-path: polygon(0 0, 50% 63%, 100% 0);
+      transform-origin: top center;
+      transition: transform 1s cubic-bezier(.2,.8,.2,1);
+      z-index: 6;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .seal {
+      position: absolute;
+      left: 50%;
+      top: 79px;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at 35% 35%, #ffdce6, #d7899c 72%);
+      color: #fff;
+      font-size: 18px;
+      z-index: 7;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+      transition: opacity 0.4s ease;
+    }
+
+    .envelope.open .seal {
+      opacity: 0;
+    }
+
+    .letter {
+      position: absolute;
+      left: 50%;
+      bottom: 16px;
+      transform: translateX(-50%) translateY(40px);
+      width: 305px;
+      height: 188px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffdf8, var(--paper));
+      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+      z-index: 3;
+      overflow: hidden;
+      transition:
+        transform 1.15s cubic-bezier(.2,.8,.2,1),
+        height 0.7s ease 0.85s;
+    }
+
+    .envelope.open .letter {
+      transform: translateX(-50%) translateY(-98px);
+      height: 310px;
+      z-index: 5;
+    }
+
+    .letter-inner {
+      height: 100%;
+      padding: 24px 24px 22px;
+      color: var(--paper-text);
+      text-align: left;
+      opacity: 0;
+      transition: opacity 0.45s ease 1.08s;
+    }
+
+    .envelope.open .letter-inner {
+      opacity: 1;
+    }
+
+    .letter-title {
+      margin: 0 0 10px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.2rem;
+      line-height: 1;
+      font-weight: 600;
+      color: #8e6459;
+    }
+
+    .letter-body {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.72;
+      white-space: pre-line;
+    }
+
+    @media (max-width: 1100px) {
+      .gallery-strip {
+        grid-template-columns: repeat(5, minmax(120px, 1fr));
+      }
+
+      .photo {
+        min-height: 190px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .gallery-strip {
+        overflow-x: auto;
+        grid-template-columns: repeat(5, 180px);
+        padding-bottom: 4px;
+      }
+
+      .photo {
+        min-height: 220px;
+      }
+
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 20px 12px 38px;
+      }
+
+      .hero-card {
+        padding: 28px 16px 24px;
+      }
+
+      .envelope {
+        width: 300px;
+        height: 196px;
+      }
+
+      .letter {
+        width: 270px;
+      }
+
+      .envelope.open .letter {
+        height: 330px;
+        transform: translateX(-50%) translateY(-103px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .heart,
+      .photo img,
+      .envelope,
+      .envelope-flap,
+      .letter {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="page">
+    <canvas id="snow" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="mountains" aria-hidden="true"></div>
 
-<div class="container">
+    <main class="wrap">
+      <section class="hero-card">
+        <div class="eyebrow">För min älskling</div>
+        <h1>Jag längtar efter dig</h1>
+        <p class="lead">
+          Medan du är bland snöklädda berg och kalla vindar
+          tänker jag på dig lite för ofta, lite för mycket och med hela mitt hjärta.
+          Här är varje sekund som återstår tills du kommer hem till mig igen.
+        </p>
 
-<h1>Jag saknar dig ❄️</h1>
+        <div class="timer-title">Nedräkning tills du kommer hem</div>
 
-<div class="subtitle">
-Medan du åker skidor i bergen  
-räknar jag varje sekund tills du är hemma igen.
-</div>
+        <div class="countdown">
+          <div class="time-box">
+            <span class="time-value" id="days">00</span>
+            <span class="time-unit">dagar</span>
+          </div>
+          <div class="time-box">
+            <span class="time-value" id="hours">00</span>
+            <span class="time-unit">timmar</span>
+          </div>
+          <div class="time-box">
+            <span class="time-value" id="minutes">00</span>
+            <span class="time-unit">minuter</span>
+          </div>
+          <div class="time-box">
+            <span class="time-value" id="seconds">00</span>
+            <span class="time-unit">sekunder</span>
+          </div>
+        </div>
 
-<div id="timer"></div>
+        <div class="countdown-message" id="countdownMessage">
+          Varje sekund är ett steg närmare dig ❤️
+        </div>
 
-<div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+      </section>
 
-<div class="footer">
-Åk försiktigt min älskling ⛷️  
-Jag längtar efter dig.
-</div>
+      <section class="gallery-strip" aria-label="Våra bilder">
+        <figure class="photo"><img src="1.jpg" alt="Bild 1"></figure>
+        <figure class="photo"><img src="2.jpg" alt="Bild 2"></figure>
+        <figure class="photo"><img src="3.jpg" alt="Bild 3"></figure>
+        <figure class="photo"><img src="4.jpg" alt="Bild 4"></figure>
+        <figure class="photo"><img src="5.jpg" alt="Bild 5"></figure>
+      </section>
 
-</div>
+      <section class="panels">
+        <div class="panel">
+          <h2>Lugn musik</h2>
+          <p>
+            Lägg en fil som heter <strong>music.mp3</strong> i samma mapp som sidan.
+            Vissa mobiler tillåter inte autoplay direkt, därför finns en knapp för att starta musiken.
+          </p>
 
-<script>
+          <div class="music-controls">
+            <button class="btn btn-primary" id="musicToggle">Spela musik</button>
+            <button class="btn btn-secondary" id="musicRestart">Spela från början</button>
+          </div>
 
-const targetDate = new Date("2026-03-14T16:35:00").getTime();
+          <audio id="bgMusic" loop preload="auto">
+            <source src="music.mp3" type="audio/mpeg">
+          </audio>
 
-const timer = setInterval(function(){
+          <div class="music-status" id="musicStatus">Musiken är pausad.</div>
+        </div>
 
-const now = new Date().getTime();
-const distance = targetDate - now;
+        <div class="panel">
+          <h2>Ett brev väntar på dig</h2>
+          <p id="envelopeInstruction">
+            <span class="status-dot" id="statusDot"></span>
+            När nedräkningen når 0 får du öppna kuvertet och läsa min kärlekshälsning till dig.
+          </p>
 
-const dagar = Math.floor(distance / (1000 * 60 * 60 * 24));
-const timmar = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minuter = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-const sekunder = Math.floor((distance % (1000 * 60)) / 1000);
+          <div class="envelope-area">
+            <div class="envelope-stack">
+              <div class="hint-badge" id="hintBadge">Öppnas när tiden är ute ✨</div>
 
-document.getElementById("timer").innerHTML =
-dagar + " dagar " +
-timmar + " timmar " +
-minuter + " minuter " +
-sekunder + " sekunder";
+              <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Öppna brevet" aria-disabled="true">
+                <div class="letter">
+                  <div class="letter-inner">
+                    <h3 class="letter-title">Min älskling</h3>
+                    <p class="letter-body" id="letterText">
+Jag har saknat dig mer än jag egentligen kan sätta ord på.
 
-if(distance < 0){
-clearInterval(timer);
-document.getElementById("timer").innerHTML = "Du är hemma! ❤️";
-}
+Det är något med dig som gör allting varmare,
+lugnare och mycket finare.
+Och även om du har varit borta bland snö och fjäll,
+så har du varit nära mig hela tiden i tankarna.
 
-},1000);
+Jag längtar efter ditt leende,
+din röst,
+din närhet
+och känslan av att få hålla om dig igen.
 
-</script>
+Så när du läser detta
+vill jag bara att du ska veta
+att jag tycker om dig otroligt mycket
+och att jag är så glad att just du är du.
 
+Välkommen hem, min fina skatt ❤️
+                    </p>
+                  </div>
+                </div>
+
+                <div class="envelope-back"></div>
+                <div class="envelope-pocket"></div>
+                <div class="envelope-flap"></div>
+                <div class="seal">❤</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            Brevtexten kan du ändra direkt i HTML där det står <strong>id="letterText"</strong>.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // =========================
+    // NEDRÄKNING
+    // =========================
+    // 14 mars 2026 kl 16:35
+    const targetDate = new Date(2026, 2, 14, 16, 35, 0).getTime();
+
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const countdownMessage = document.getElementById("countdownMessage");
+
+    const envelope = document.getElementById("envelope");
+    const hintBadge = document.getElementById("hintBadge");
+    const envelopeInstruction = document.getElementById("envelopeInstruction");
+    const statusDot = document.getElementById("statusDot");
+
+    let unlocked = false;
+    let timerFinished = false;
+
+    function pad(num) {
+      return String(num).padStart(2, "0");
+    }
+
+    function unlockEnvelope() {
+      unlocked = true;
+      envelope.classList.add("unlocked");
+      envelope.setAttribute("aria-disabled", "false");
+      hintBadge.textContent = "Nu kan du öppna brevet 💌";
+
+      envelopeInstruction.innerHTML = `
+        <span class="status-dot ready"></span>
+        Tiden är ute. Nu får du öppna kuvertet och läsa min hälsning till dig.
+      `;
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        countdownMessage.textContent = "Nu är väntan över — välkommen hem, min älskling ❤️";
+
+        if (!timerFinished) {
+          timerFinished = true;
+          unlockEnvelope();
+        }
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      daysEl.textContent = pad(days);
+      hoursEl.textContent = pad(hours);
+      minutesEl.textContent = pad(minutes);
+      secondsEl.textContent = pad(seconds);
+
+      countdownMessage.textContent = "Varje sekund är ett steg närmare dig ❤️";
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // =========================
+    // KUVERT
+    // =========================
+    function openEnvelope() {
+      if (!unlocked) {
+        envelope.classList.remove("locked-shake");
+        void envelope.offsetWidth;
+        envelope.classList.add("locked-shake");
+        return;
+      }
+
+      envelope.classList.toggle("open");
+      hintBadge.textContent = envelope.classList.contains("open")
+        ? "Brevet är öppet 💖"
+        : "Tryck igen om du vill stänga brevet";
+    }
+
+    envelope.addEventListener("click", openEnvelope);
+    envelope.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+
+    // =========================
+    // MUSIK
+    // =========================
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
+    const musicRestart = document.getElementById("musicRestart");
+    const musicStatus = document.getElementById("musicStatus");
+
+    function updateMusicUI(isPlaying) {
+      musicToggle.textContent = isPlaying ? "Pausa musik" : "Spela musik";
+      musicStatus.textContent = isPlaying ? "Musiken spelas." : "Musiken är pausad.";
+    }
+
+    async function tryPlayMusic() {
+      try {
+        await bgMusic.play();
+        updateMusicUI(true);
+      } catch (err) {
+        updateMusicUI(false);
+      }
+    }
+
+    musicToggle.addEventListener("click", async function() {
+      if (bgMusic.paused) {
+        await tryPlayMusic();
+      } else {
+        bgMusic.pause();
+        updateMusicUI(false);
+      }
+    });
+
+    musicRestart.addEventListener("click", async function() {
+      bgMusic.currentTime = 0;
+      await tryPlayMusic();
+    });
+
+    function enableAutoplayOnFirstGesture() {
+      tryPlayMusic();
+      window.removeEventListener("click", enableAutoplayOnFirstGesture);
+      window.removeEventListener("touchstart", enableAutoplayOnFirstGesture);
+      window.removeEventListener("keydown", enableAutoplayOnFirstGesture);
+    }
+
+    window.addEventListener("click", enableAutoplayOnFirstGesture, { once: true });
+    window.addEventListener("touchstart", enableAutoplayOnFirstGesture, { once: true });
+    window.addEventListener("keydown", enableAutoplayOnFirstGesture, { once: true });
+
+    // =========================
+    // FALLANDE SNÖ
+    // =========================
+    const canvas = document.getElementById("snow");
+    const ctx = canvas.getContext("2d");
+
+    let flakes = [];
+    let width = 0;
+    let height = 0;
+    const flakeCount = 150;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function makeFlake(initial = false) {
+      return {
+        x: Math.random() * width,
+        y: initial ? Math.random() * height : -20 - Math.random() * 120,
+        r: Math.random() * 3.2 + 0.7,
+        speedY: Math.random() * 1.2 + 0.5,
+        speedX: (Math.random() - 0.5) * 0.55,
+        drift: Math.random() * Math.PI * 2,
+        driftSpeed: Math.random() * 0.02 + 0.004,
+        opacity: Math.random() * 0.55 + 0.2
+      };
+    }
+
+    function initFlakes() {
+      flakes = [];
+      for (let i = 0; i < flakeCount; i++) {
+        flakes.push(makeFlake(true));
+      }
+    }
+
+    function drawSnow() {
+      ctx.clearRect(0, 0, width, height);
+
+      for (const f of flakes) {
+        f.drift += f.driftSpeed;
+        f.x += f.speedX + Math.sin(f.drift) * 0.33;
+        f.y += f.speedY;
+
+        if (f.y > height + 12 || f.x < -20 || f.x > width + 20) {
+          Object.assign(f, makeFlake(false));
+        }
+
+        ctx.beginPath();
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${f.opacity})`;
+        ctx.fill();
+      }
+
+      requestAnimationFrame(drawSnow);
+    }
+
+    resizeCanvas();
+    initFlakes();
+    drawSnow();
+
+    window.addEventListener("resize", function() {
+      resizeCanvas();
+      initFlakes();
+    });
+  </script>
 </body>
 </html>
-```
