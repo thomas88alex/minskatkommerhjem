@@ -11,27 +11,27 @@
 
   <style>
     :root {
-      --bg-top: #0d1624;
-      --bg-mid: #1b2d42;
-      --bg-bottom: #2f4f69;
+      --bg-top: #09121d;
+      --bg-mid: #16273a;
+      --bg-bottom: #29445b;
 
-      --glass: rgba(255, 255, 255, 0.11);
-      --glass-strong: rgba(255, 255, 255, 0.15);
-      --glass-border: rgba(255, 255, 255, 0.18);
+      --glass: rgba(255,255,255,0.10);
+      --glass-strong: rgba(255,255,255,0.14);
+      --glass-border: rgba(255,255,255,0.16);
 
       --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.84);
-      --soft: rgba(255, 255, 255, 0.66);
+      --muted: rgba(255,255,255,0.83);
+      --soft: rgba(255,255,255,0.64);
 
-      --gold: #f0dec2;
-      --blush: #f5dbe6;
+      --gold: #f0dfc2;
+      --blush: #f8d9e3;
       --paper: #fffaf2;
-      --paper-text: #5d4b3f;
+      --paper-text: #5d4a3d;
 
-      --shadow: 0 22px 60px rgba(0,0,0,0.28);
-      --radius-xl: 30px;
-      --radius-lg: 22px;
-      --radius-md: 16px;
+      --shadow: 0 24px 60px rgba(0,0,0,0.30);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
     }
 
     * {
@@ -45,7 +45,7 @@
       font-family: "Inter", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 50% -10%, rgba(255,255,255,0.18), transparent 25%),
+        radial-gradient(circle at 50% -10%, rgba(255,255,255,0.14), transparent 24%),
         linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 42%, var(--bg-bottom) 100%);
     }
 
@@ -65,8 +65,8 @@
       inset: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
       z-index: 0;
+      pointer-events: none;
     }
 
     .aurora {
@@ -75,35 +75,71 @@
       z-index: 0;
       pointer-events: none;
       background:
-        radial-gradient(circle at 20% 15%, rgba(255, 225, 235, 0.10), transparent 25%),
-        radial-gradient(circle at 80% 10%, rgba(255, 242, 210, 0.10), transparent 28%),
-        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.07), transparent 30%);
-      filter: blur(20px);
+        radial-gradient(circle at 18% 15%, rgba(255, 220, 232, 0.08), transparent 24%),
+        radial-gradient(circle at 82% 10%, rgba(255, 241, 211, 0.08), transparent 26%),
+        radial-gradient(circle at 50% 28%, rgba(255,255,255,0.05), transparent 28%);
+      filter: blur(24px);
     }
 
     .mountains {
       position: fixed;
       inset: auto 0 0 0;
-      height: 35vh;
+      height: 34vh;
       z-index: 0;
       pointer-events: none;
       opacity: 0.95;
       background:
-        linear-gradient(to top, rgba(7,12,20,0.34), transparent 65%),
+        linear-gradient(to top, rgba(5,10,18,0.34), transparent 65%),
         radial-gradient(ellipse at 10% 100%, #dfe9f2 0 16%, transparent 16.4%),
-        radial-gradient(ellipse at 27% 100%, #edf4fa 0 21%, transparent 21.4%),
-        radial-gradient(ellipse at 46% 100%, #d8e3ee 0 17%, transparent 17.4%),
-        radial-gradient(ellipse at 64% 100%, #edf4fa 0 23%, transparent 23.4%),
-        radial-gradient(ellipse at 82% 100%, #dce8f2 0 19%, transparent 19.4%),
+        radial-gradient(ellipse at 29% 100%, #edf4fa 0 21%, transparent 21.4%),
+        radial-gradient(ellipse at 48% 100%, #d8e3ee 0 17%, transparent 17.4%),
+        radial-gradient(ellipse at 67% 100%, #edf4fa 0 23%, transparent 23.4%),
+        radial-gradient(ellipse at 84% 100%, #dce8f2 0 19%, transparent 19.4%),
         radial-gradient(ellipse at 100% 100%, #eef5fb 0 15%, transparent 15.4%);
     }
 
     .wrap {
       position: relative;
       z-index: 2;
-      max-width: 1280px;
+      max-width: 1150px;
       margin: 0 auto;
-      padding: 30px 18px 50px;
+      padding: 28px 18px 50px;
+    }
+
+    .music-fab {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 5;
+      width: 52px;
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .music-fab:hover {
+      transform: translateY(-1px) scale(1.02);
+      background: rgba(255,255,255,0.16);
+    }
+
+    .music-fab svg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+      opacity: 0.95;
+    }
+
+    .music-fab.playing {
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.05), 0 12px 26px rgba(0,0,0,0.22);
     }
 
     .hero-card {
@@ -127,8 +163,8 @@
       inset: 0;
       pointer-events: none;
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.12), transparent 32%),
-        radial-gradient(circle at top right, rgba(255,245,230,0.12), transparent 26%);
+        linear-gradient(135deg, rgba(255,255,255,0.10), transparent 35%),
+        radial-gradient(circle at top right, rgba(255,245,230,0.10), transparent 25%);
     }
 
     .eyebrow {
@@ -137,9 +173,9 @@
       padding: 8px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.13);
       color: var(--gold);
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
@@ -147,7 +183,7 @@
     h1 {
       margin: 8px 0 12px;
       font-family: "Cormorant Garamond", serif;
-      font-size: clamp(3.3rem, 8vw, 5.8rem);
+      font-size: clamp(3.4rem, 8vw, 5.9rem);
       line-height: 0.95;
       font-weight: 600;
       letter-spacing: 0.01em;
@@ -223,67 +259,42 @@
       50% { transform: scale(1.14); }
     }
 
-    .gallery-strip {
-      max-width: 1280px;
+    .gallery-card {
+      max-width: 1080px;
       margin: 0 auto 28px;
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
-      align-items: stretch;
-    }
-
-    .photo {
-      position: relative;
-      overflow: hidden;
-      border-radius: 18px;
-      min-height: 240px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 10px;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.07));
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
     }
 
-    .photo img {
-      width: 100%;
-      height: 100%;
+    .gallery-image {
       display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
       object-fit: cover;
-      transition: transform 0.55s ease;
-    }
-
-    .photo:hover img {
-      transform: scale(1.045);
-    }
-
-    .photo::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0 0;
-      height: 42%;
-      background: linear-gradient(to top, rgba(0,0,0,0.22), transparent);
-      pointer-events: none;
-    }
-
-    .panels {
-      max-width: 860px;
-      margin: 0 auto;
-      display: grid;
-      gap: 20px;
     }
 
     .panel {
+      max-width: 860px;
+      margin: 0 auto;
       border-radius: 26px;
       background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.08));
       border: 1px solid rgba(255,255,255,0.18);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
-      padding: 22px 18px;
+      padding: 24px 18px 22px;
       text-align: center;
     }
 
     .panel h2 {
       margin: 0 0 8px;
-      font-size: 1.05rem;
+      font-size: 1.08rem;
       font-weight: 600;
       color: #fff;
     }
@@ -294,46 +305,6 @@
       color: var(--muted);
       line-height: 1.7;
       font-size: 0.97rem;
-    }
-
-    .music-controls {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      appearance: none;
-      border: none;
-      border-radius: 999px;
-      padding: 12px 18px;
-      font: inherit;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.18s ease, opacity 0.18s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: rgba(255,255,255,0.92);
-      color: #17304a;
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.14);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.16);
-    }
-
-    .music-status,
-    .footer-note {
-      margin-top: 12px;
-      color: var(--soft);
-      font-size: 0.9rem;
     }
 
     .status-dot {
@@ -356,9 +327,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 280px;
+      min-height: 290px;
       perspective: 1300px;
-      padding-top: 6px;
+      padding-top: 8px;
     }
 
     .envelope-stack {
@@ -493,7 +464,7 @@
 
     .envelope.open .letter {
       transform: translateX(-50%) translateY(-98px);
-      height: 310px;
+      height: 315px;
       z-index: 5;
     }
 
@@ -526,27 +497,13 @@
       white-space: pre-line;
     }
 
-    @media (max-width: 1100px) {
-      .gallery-strip {
-        grid-template-columns: repeat(5, minmax(120px, 1fr));
-      }
-
-      .photo {
-        min-height: 190px;
-      }
+    .footer-note {
+      margin-top: 12px;
+      color: var(--soft);
+      font-size: 0.9rem;
     }
 
     @media (max-width: 900px) {
-      .gallery-strip {
-        overflow-x: auto;
-        grid-template-columns: repeat(5, 180px);
-        padding-bottom: 4px;
-      }
-
-      .photo {
-        min-height: 220px;
-      }
-
       .countdown {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -559,6 +516,13 @@
 
       .hero-card {
         padding: 28px 16px 24px;
+      }
+
+      .music-fab {
+        width: 48px;
+        height: 48px;
+        top: 14px;
+        right: 14px;
       }
 
       .envelope {
@@ -578,10 +542,10 @@
 
     @media (prefers-reduced-motion: reduce) {
       .heart,
-      .photo img,
       .envelope,
       .envelope-flap,
-      .letter {
+      .letter,
+      .music-fab {
         animation: none !important;
         transition: none !important;
       }
@@ -594,13 +558,23 @@
     <div class="aurora" aria-hidden="true"></div>
     <div class="mountains" aria-hidden="true"></div>
 
+    <button class="music-fab" id="musicToggle" aria-label="Spela eller pausa musik" title="Spela eller pausa musik">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"></path>
+      </svg>
+    </button>
+
+    <audio id="bgMusic" loop preload="auto">
+      <source src="music.mp3" type="audio/mpeg">
+    </audio>
+
     <main class="wrap">
       <section class="hero-card">
         <div class="eyebrow">För min älskling</div>
         <h1>Jag längtar efter dig</h1>
         <p class="lead">
-          Medan du är bland snöklädda berg och kalla vindar
-          tänker jag på dig lite för ofta, lite för mycket och med hela mitt hjärta.
+          Medan du är bland snö, fjäll och kalla vindar
+          tänker jag på dig med hela mitt hjärta.
           Här är varje sekund som återstår tills du kommer hem till mig igen.
         </p>
 
@@ -632,56 +606,32 @@
         <div class="heart">❤️</div>
       </section>
 
-      <section class="gallery-strip" aria-label="Våra bilder">
-        <figure class="photo"><img src="1.jpg" alt="Bild 1"></figure>
-        <figure class="photo"><img src="2.jpg" alt="Bild 2"></figure>
-        <figure class="photo"><img src="3.jpg" alt="Bild 3"></figure>
-        <figure class="photo"><img src="4.jpg" alt="Bild 4"></figure>
-        <figure class="photo"><img src="5.jpg" alt="Bild 5"></figure>
+      <section class="gallery-card">
+        <img src="vanjathomas.png" alt="Vår bild" class="gallery-image">
       </section>
 
-      <section class="panels">
-        <div class="panel">
-          <h2>Lugn musik</h2>
-          <p>
-            Lägg en fil som heter <strong>music.mp3</strong> i samma mapp som sidan.
-            Vissa mobiler tillåter inte autoplay direkt, därför finns en knapp för att starta musiken.
-          </p>
+      <section class="panel">
+        <h2>Ett brev väntar på dig</h2>
+        <p id="envelopeInstruction">
+          <span class="status-dot"></span>
+          När nedräkningen når 0 får du öppna kuvertet och läsa min kärlekshälsning till dig.
+        </p>
 
-          <div class="music-controls">
-            <button class="btn btn-primary" id="musicToggle">Spela musik</button>
-            <button class="btn btn-secondary" id="musicRestart">Spela från början</button>
-          </div>
+        <div class="envelope-area">
+          <div class="envelope-stack">
+            <div class="hint-badge" id="hintBadge">Öppnas när tiden är ute ✨</div>
 
-          <audio id="bgMusic" loop preload="auto">
-            <source src="music.mp3" type="audio/mpeg">
-          </audio>
-
-          <div class="music-status" id="musicStatus">Musiken är pausad.</div>
-        </div>
-
-        <div class="panel">
-          <h2>Ett brev väntar på dig</h2>
-          <p id="envelopeInstruction">
-            <span class="status-dot" id="statusDot"></span>
-            När nedräkningen når 0 får du öppna kuvertet och läsa min kärlekshälsning till dig.
-          </p>
-
-          <div class="envelope-area">
-            <div class="envelope-stack">
-              <div class="hint-badge" id="hintBadge">Öppnas när tiden är ute ✨</div>
-
-              <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Öppna brevet" aria-disabled="true">
-                <div class="letter">
-                  <div class="letter-inner">
-                    <h3 class="letter-title">Min älskling</h3>
-                    <p class="letter-body" id="letterText">
+            <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Öppna brevet" aria-disabled="true">
+              <div class="letter">
+                <div class="letter-inner">
+                  <h3 class="letter-title">Min älskling</h3>
+                  <p class="letter-body" id="letterText">
 Jag har saknat dig mer än jag egentligen kan sätta ord på.
 
 Det är något med dig som gör allting varmare,
 lugnare och mycket finare.
-Och även om du har varit borta bland snö och fjäll,
-så har du varit nära mig hela tiden i tankarna.
+Och även om du är borta just nu,
+så är du nära mig hela tiden i tankarna.
 
 Jag längtar efter ditt leende,
 din röst,
@@ -694,30 +644,26 @@ att jag tycker om dig otroligt mycket
 och att jag är så glad att just du är du.
 
 Välkommen hem, min fina skatt ❤️
-                    </p>
-                  </div>
+                  </p>
                 </div>
-
-                <div class="envelope-back"></div>
-                <div class="envelope-pocket"></div>
-                <div class="envelope-flap"></div>
-                <div class="seal">❤</div>
               </div>
+
+              <div class="envelope-back"></div>
+              <div class="envelope-pocket"></div>
+              <div class="envelope-flap"></div>
+              <div class="seal">❤</div>
             </div>
           </div>
+        </div>
 
-          <div class="footer-note">
-            Brevtexten kan du ändra direkt i HTML där det står <strong>id="letterText"</strong>.
-          </div>
+        <div class="footer-note">
+          Du kan ändra brevet direkt i HTML-koden där det står <strong>id="letterText"</strong>.
         </div>
       </section>
     </main>
   </div>
 
   <script>
-    // =========================
-    // NEDRÄKNING
-    // =========================
     // 14 mars 2026 kl 16:35
     const targetDate = new Date(2026, 2, 14, 16, 35, 0).getTime();
 
@@ -730,7 +676,9 @@ Välkommen hem, min fina skatt ❤️
     const envelope = document.getElementById("envelope");
     const hintBadge = document.getElementById("hintBadge");
     const envelopeInstruction = document.getElementById("envelopeInstruction");
-    const statusDot = document.getElementById("statusDot");
+
+    const bgMusic = document.getElementById("bgMusic");
+    const musicToggle = document.getElementById("musicToggle");
 
     let unlocked = false;
     let timerFinished = false;
@@ -785,9 +733,6 @@ Välkommen hem, min fina skatt ❤️
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // =========================
-    // KUVERT
-    // =========================
     function openEnvelope() {
       if (!unlocked) {
         envelope.classList.remove("locked-shake");
@@ -810,25 +755,13 @@ Välkommen hem, min fina skatt ❤️
       }
     });
 
-    // =========================
-    // MUSIK
-    // =========================
-    const bgMusic = document.getElementById("bgMusic");
-    const musicToggle = document.getElementById("musicToggle");
-    const musicRestart = document.getElementById("musicRestart");
-    const musicStatus = document.getElementById("musicStatus");
-
-    function updateMusicUI(isPlaying) {
-      musicToggle.textContent = isPlaying ? "Pausa musik" : "Spela musik";
-      musicStatus.textContent = isPlaying ? "Musiken spelas." : "Musiken är pausad.";
-    }
-
     async function tryPlayMusic() {
       try {
         await bgMusic.play();
-        updateMusicUI(true);
+        musicToggle.classList.add("playing");
       } catch (err) {
-        updateMusicUI(false);
+        bgMusic.pause();
+        musicToggle.classList.remove("playing");
       }
     }
 
@@ -837,29 +770,10 @@ Välkommen hem, min fina skatt ❤️
         await tryPlayMusic();
       } else {
         bgMusic.pause();
-        updateMusicUI(false);
+        musicToggle.classList.remove("playing");
       }
     });
 
-    musicRestart.addEventListener("click", async function() {
-      bgMusic.currentTime = 0;
-      await tryPlayMusic();
-    });
-
-    function enableAutoplayOnFirstGesture() {
-      tryPlayMusic();
-      window.removeEventListener("click", enableAutoplayOnFirstGesture);
-      window.removeEventListener("touchstart", enableAutoplayOnFirstGesture);
-      window.removeEventListener("keydown", enableAutoplayOnFirstGesture);
-    }
-
-    window.addEventListener("click", enableAutoplayOnFirstGesture, { once: true });
-    window.addEventListener("touchstart", enableAutoplayOnFirstGesture, { once: true });
-    window.addEventListener("keydown", enableAutoplayOnFirstGesture, { once: true });
-
-    // =========================
-    // FALLANDE SNÖ
-    // =========================
     const canvas = document.getElementById("snow");
     const ctx = canvas.getContext("2d");
 
