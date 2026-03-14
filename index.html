@@ -473,11 +473,11 @@
   padding: 20px 0 40px 0;
 }
 
-    .envelope-stack {
-      position: relative;
-      width: min(92vw, 410px);
-      height: 250px;
-    }
+.envelope-stack {
+  position: relative;
+  width: min(92vw, 410px);
+  height: 360px;
+}
 
     .hint-badge {
       position: absolute;
@@ -530,12 +530,13 @@
       75% { transform: translateX(-50%) rotate(-1deg); }
     }
 
-    .envelope-back {
-      position: absolute;
-      inset: 0;
-      border-radius: 12px;
-      background: linear-gradient(180deg, #f7e0bd, #e8c391);
-    }
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #f7e0bd, #e8c391);
+  z-index: 1;
+}
 
     .envelope-pocket {
       position: absolute;
@@ -586,28 +587,28 @@
       opacity: 0;
     }
 
-    .letter {
-      position: absolute;
-      left: 50%;
-      bottom: 16px;
-      transform: translateX(-50%) translateY(40px);
-      width: 305px;
-      height: 188px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, #fffdf8, var(--paper));
-      box-shadow: 0 16px 30px rgba(0,0,0,0.16);
-      z-index: 3;
-      overflow: hidden;
-      transition:
-        transform 1.15s cubic-bezier(.2,.8,.2,1),
-        height 0.7s ease 0.85s;
-    }
+.letter {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%) translateY(40px);
+  width: 305px;
+  height: 188px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fffdf8, var(--paper));
+  box-shadow: 0 16px 30px rgba(0,0,0,0.16);
+  z-index: 2;
+  overflow: hidden;
+  transition:
+    transform 1.15s cubic-bezier(.2,.8,.2,1),
+    height 0.7s ease 0.85s;
+}
 
-    .envelope.open .letter {
-      transform: translateX(-50%) translateY(-98px);
-      height: 315px;
-      z-index: 5;
-    }
+.envelope.open .letter {
+  transform: translateX(-50%) translateY(-120px);
+  height: 395px;
+  z-index: 8;
+}
 
     .letter-inner {
       height: 100%;
@@ -618,7 +619,7 @@
       transition: opacity 0.45s ease 1.08s;
     }
 
-    .envelope.open .letter-inner {
+    -inner {
       opacity: 1;
     }
 
@@ -690,10 +691,11 @@
         width: 270px;
       }
 
-      .envelope.open .letter {
-        height: 330px;
-        transform: translateX(-50%) translateY(-103px);
-      }
+.envelope.open .letter {
+  height: 410px;
+  transform: translateX(-50%) translateY(-118px);
+  z-index: 8;
+}
     }
   </style>
 </head>
